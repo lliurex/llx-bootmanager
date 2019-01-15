@@ -1,0 +1,10 @@
+{
+  "id": "llx-bootmanager",
+  "version": "0.1",
+  "name": "Boot Manager",
+  "description": "llx.bootmanager.short.description",
+  "main":"main.html",
+  "icon": "lmd-boot-manager.png",
+  "banner":"lmd-boot-banner.png",
+  "components": [ ]
+}

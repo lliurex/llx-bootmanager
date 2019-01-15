@@ -1,0 +1,4 @@
+{
+	"bootorder":["bootfromhd","netinstall"],
+	"timeout": "50"
+}

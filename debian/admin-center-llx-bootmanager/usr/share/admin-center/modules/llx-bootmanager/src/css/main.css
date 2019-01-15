@@ -1,0 +1,139 @@
+
+.CursorWaiting{
+	cursor: wait !important;
+}
+
+/*Main Window*/
+
+#llx_bootmanager_MainFrame{	
+    display: none;
+	margin: 20px;
+}
+
+
+#llx_bootmanager_btSave{
+	display: block;
+	float: right;
+	margin: 0px 30px 0px 0px;
+	clear: both;
+}
+
+
+/* Sortable list */
+#llx_bootmanager_BootListDiv{
+    float: left;
+    clear: left;
+    display: block;
+	width: 300px;
+}
+
+#llx_bootmanager_BootList{
+	/*background: #ff0000;*/
+	min-height: 50px;
+}
+
+#llx_bootmanager_AvailableOptionsDiv{
+    float: left;
+    clear: right;
+    display: block;
+	width: 300px;
+}
+
+#llx_bootmanager_AvailableOptions{
+	/*background: #00ff00;*/
+	min-height: 50px;
+}
+
+#llx_bootmanager_SortLists{
+	/*background: #0000ff;*/
+	/*width: 650px;*/
+	min-height: 200px;
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+ul.llx_bootmanager_ul{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.llx_bootmanager_empty{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.llx_bootmanager_ui-sortable-placeholder {
+    border: 1px dashed #aaa;
+    height: 35px;
+    width: 310px;
+    background: #fff;
+}
+
+.llx_bootmanager_bootitem{
+    border: 1px #cccccc solid;
+    background: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 2px -2px;
+    width: 270px;
+    height: 55px;
+    padding: 0px;
+    overflow: hidden;
+    margin: 2px;
+
+}
+
+.llx_bootmanager_bootitem:hover{
+    cursor: move;
+}
+
+.llx_bootmanager_menuEntry{
+	margin: 1px;
+    height: 35px;
+    width: 310px;
+    background: #03A9F4;
+	color: #ffffff;
+	
+	padding: 10px 0px 5px 35px;
+	font-size: 0.9em;
+	background-repeat: no-repeat;
+	background-position: 5px 5px;
+}
+
+.llx_bootmanager_menuEntry:hover{
+	cursor: move;
+}
+
+.llx_bootmanager_ltsp{
+	background-image: url("img/ltsp.png");
+}
+
+.llx_bootmanager_bootfromhd{
+	background-image: url("img/diskboot.png");
+	
+}
+
+.llx_bootmanager_netinstall{	
+	background-image: url("img/install.png");
+}
+
+.llx_bootmanager_list_explanation{
+	font-size: 0.9em;
+	margin: 10px;
+}
+
+.llx_bootmanager_list_title{
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+#llx_bootmanager_timer{
+	/*width: 270px;*/
+	padding: 30px;
+	border: #cccccc 1px solid;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+

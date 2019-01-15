@@ -1,0 +1,47 @@
+<h1 class="topBanner" i18n>llx_bootmanager.boot_manager_title</h1>
+
+
+<div class="panel panel-default col-md-10 col-md-offset-1" style="padding:0px;">
+<div class="panel-heading"><h2 i18n>llx_bootmanager.boot_manager_boot_order</h2></div>
+<div id="LtspImageManagerContainer" class="panel-body">
+<p i18n>llx_bootmanager.boot_manager_description</p>
+
+
+
+<div id="llx_bootmanager_MainFrame">
+	<!--div class="llx_bootmanager_list_explanation" i18n>llx_bootmanager.instructions</div-->
+
+	<div id="llx_bootmanager_SortLists" class="col-md-10 col-md-offset-1">
+		<div id="llx_bootmanager_BootListDiv" class="col-md-5 col-md-offset-1">
+			<div class="llx_bootmanager_list_title" i18n>llx_bootmanager.bootorder</div>
+				<ul class="llx_bootmanager_ul connectedSortable" id="llx_bootmanager_BootList">
+				</ul>
+		</div>
+
+		<div id="llx_bootmanager_AvailableOptionsDiv" class="col-md-5 col-md-offset-1">
+			<div class="llx_bootmanager_list_title" i18n>llx_bootmanager.available.bootorder</div>
+				<ul id="llx_bootmanager_AvailableOptions" class="connectedSortable llx_bootmanager_ul col-md-12">
+				</ul>
+
+		</div>
+	</div>
+
+
+	<div id="llx_bootmanager_timer">
+		<p>
+		<label for="llx_bootmanager_timeout" i18n>llx_bootmanager.timeout</label>
+		<input type="text" id="llx_bootmanager_timeout" readonly style="border:0; color:#2573eb; font-weight:bold;">
+		</p>
+		<!--div id="slider-range-min" class="slider"></div-->
+		<div class="slider shor slider-material-pink" id="llx_bootmanager_slider"></div>
+
+	</div>
+	<button class="btn btn-primary btn-raised btn-lg" id="llx_bootmanager_btSave" i18n>llx_bootmanager.save</button>
+
+</div>
+
+</div>
+
+</div>
+
+

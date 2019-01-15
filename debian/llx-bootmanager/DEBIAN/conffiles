@@ -1,0 +1,4 @@
+/etc/apache2/sites-available/ipxeboot.conf
+/etc/dnsmasq.d/llxbootmanager.conf
+/etc/llxbootmanager/bootcfg.json
+/etc/n4d/conf.d/LlxBootManager
