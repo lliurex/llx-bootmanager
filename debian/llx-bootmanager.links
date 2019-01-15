@@ -1,8 +1,0 @@
-/var/lib/tftpboot/llxbootmanager /usr/share/llxbootmanager/www-boot/pxe
-#/usr/lib/syslinux/modules/bios/chain.c32 /usr/share/llxbootmanager/www-boot/chain.c32
-#/usr/lib/syslinux/modules/bios/menu.c32 /var/lib/tftpboot/llxbootmanager/menu.c32
-#/var/lib/tftpboot/ltsp/netinstall/pxelinux.0 /var/lib/tftpboot/llxbootmanager/pxelinux.0
-#/usr/lib/syslinux/modules/bios/vesamenu.c32 /var/lib/tftpboot/llxbootmanager/pxelinux.cfg/vesamenu.c32 
-/usr/share/llxbootmanager/www-boot/pxelinux.0 /var/lib/tftpboot/llxbootmanager/pxelinux.0
-/usr/share/llxbootmanager/www-boot/vesamenu.c32 /var/lib/tftpboot/llxbootmanager/pxelinux.cfg/vesamenu.c32 
-/usr/share/llxbootmanager/www-boot /var/www/ipxeboot
