@@ -1,0 +1,17 @@
+[SETUP]
+type=python
+path=LlxBootManager.py
+class=LlxBootManager
+perms=anonymous
+[METHODS]
+getBootList=anonymous
+getBootOrder=anonymous
+getBootTimer=anonymous
+setBootOrder=adm,admin,admins
+setBootTimer=adm,admin,admins
+pushToBootList=adm,admin,admins
+prependBootList=adm,admin,admins
+removeFromBootList=adm,admin,admins
+getClientsConfig=anonymous
+getClientConfig=anonymous
+setClientConfig=adm,admin,admins

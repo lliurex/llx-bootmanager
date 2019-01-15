@@ -1,0 +1,7 @@
+#!ipxe
+
+:retry_dhcp
+dhcp || goto retry_dhcp
+
+chain http://${next-server}/ipxeboot/boot.php?mac=${mac}&ip=${ip}&asset=${asset}&manufacturer=${manufacturer}&product=${product}&serial=${serial}
+
