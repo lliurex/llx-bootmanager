@@ -1,3 +1,9 @@
+llx-bootmanager (0.3.16) bionic; urgency=medium
+
+  * Adding sudo group to n4d plugin
+
+ -- Juan Ramon Pelegrina <juapesai@hotmail.com>  Thu, 14 Feb 2019 09:13:12 +0100
+
 llx-bootmanager (0.3.15) bionic; urgency=high
 
   * First bionic release 
