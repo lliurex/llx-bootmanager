@@ -1,3 +1,9 @@
+llx-bootmanager (0.4.2) bionic; urgency=medium
+
+  * Include module chain.c32
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Wed, 10 Apr 2019 21:55:13 +0200
+
 llx-bootmanager (0.4.1) bionic; urgency=medium
 
   * Fix linked libraries
