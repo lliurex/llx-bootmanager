@@ -1,3 +1,9 @@
+llx-bootmanager (0.4.5) bionic; urgency=medium
+
+  * Disable tftp boot startup mode
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Fri, 12 Apr 2019 19:19:00 +0200
+
 llx-bootmanager (0.4.4) bionic; urgency=medium
 
   * Add Hdt,Localboot & memory test expert options
