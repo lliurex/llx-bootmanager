@@ -8,4 +8,5 @@
 /usr/lib/syslinux/modules/bios/chain.c32 /usr/share/llxbootmanager/www-boot/chain.c32
 /usr/lib/syslinux/modules/bios/libcom32.c32 /var/lib/tftpboot/ltsp/netinstall/libcom32.c32
 /usr/lib/syslinux/modules/bios/libutil.c32 /var/lib/tftpboot/ltsp/netinstall/libutil.c32
+/usr/lib/ipxe/ipxe.efi  /var/lib/tftpboot/llxbootmanager/ipxe.efi
 /usr/share/llxbootmanager/www-boot /var/www/ipxeboot
