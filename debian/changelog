@@ -1,3 +1,11 @@
+llx-bootmanager (0.4.4) bionic; urgency=medium
+
+  * Add Hdt,Localboot & memory test expert options
+  * Allow boot without ipxe directly from native pxe
+  * Avoid retry dhcp to speedup initialization from ipxe
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Fri, 12 Apr 2019 14:29:07 +0200
+
 llx-bootmanager (0.4.3) bionic; urgency=medium
 
   * Change dnsmasq options to include experimental uefi boot
