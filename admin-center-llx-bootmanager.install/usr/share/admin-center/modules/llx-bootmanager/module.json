@@ -4,7 +4,7 @@
   "name": "Boot Manager",
   "description": "llx.bootmanager.short.description",
   "main":"main.html",
-  "icon": "lmd-boot-manager.png",
-  "banner":"lmd-boot-banner.png",
+  "icon": "lmd-boot-icon.svg",
+  "banner":"lmd-boot-banner.svg",
   "components": [ ]
 }
