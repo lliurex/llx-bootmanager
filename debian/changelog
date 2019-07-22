@@ -1,3 +1,9 @@
+llx-bootmanager (0.4.7) bionic; urgency=medium
+
+  * fix image banner
+
+ -- Juanma Navarro Mañez <juanma1980@gmail.com>  Mon, 22 Jul 2019 14:47:52 +0200
+
 llx-bootmanager (0.4.6) bionic; urgency=medium
 
   * Updated images for admin-center
