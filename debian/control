@@ -1,0 +1,25 @@
+Source: llx-bootmanager
+Section: misc
+Priority: optional
+Maintainer: LliureX Team <lliurex@gva.es>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.9.7
+
+Package: llx-bootmanager
+Depends: ${misc:Depends}, php7.2-cli, apache2, libapache2-mod-php7.2, n4d-lliurex-base ( >= 0.6 ), ipxe ( >= 1.0.0 ), pxelinux ( >= 6.04~git20190206 ), syslinux-common ( >= 6.04~git20190206 ), netinstall-boot, memtest86+
+Replaces: lmd-server(<<2.0)
+Breaks: lmd-server(<<2.0)
+Architecture: all
+Description: LliureX Boot Manager
+ Network Boot Manager basesystem 
+ for LliureX environments.
+ .
+
+Package: admin-center-llx-bootmanager
+Architecture: all 
+Depends: ${shlibs:Depends}, ${misc:Depends}, admin-center
+Description: LliureX BootManager Module For Admin Center.
+ Network Boot Manager basesystem
+ for LliureX environments. (admin-center module)
+ .
+
