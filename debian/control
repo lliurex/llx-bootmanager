@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 7)
 Standards-Version: 3.9.7
 
 Package: llx-bootmanager
-Depends: ${misc:Depends}, php-cli, apache2, libapache2-mod-php, python3-n4d-base, ipxe ( >= 1.0.0 ), pxelinux ( >= 6.04~git20190206 ), syslinux-common ( >= 6.04~git20190206 ), netinstall-boot, memtest86+
+Depends: ${misc:Depends}, php-cli, apache2, libapache2-mod-php, python3-n4d, ipxe ( >= 1.0.0 ), pxelinux ( >= 6.04~git20190206 ), syslinux-common ( >= 6.04~git20190206 ), netinstall-boot, memtest86+
 Replaces: lmd-server(<<2.0)
 Breaks: lmd-server(<<2.0)
 Architecture: all
