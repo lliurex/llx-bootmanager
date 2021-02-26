@@ -1,17 +1,37 @@
-[SETUP]
-type=python
-path=LlxBootManager.py
-class=LlxBootManager
-perms=anonymous
-[METHODS]
-getBootList=anonymous
-getBootOrder=anonymous
-getBootTimer=anonymous
-setBootOrder=sudo,admin,admins
-setBootTimer=sudo,admin,admins
-pushToBootList=sudo,admin,admins
-prependBootList=sudo,admin,admins
-removeFromBootList=sudo,admin,admins
-getClientsConfig=anonymous
-getClientConfig=anonymous
-setClientConfig=sudo,admin,admins
+{
+	"SETUP":{
+		"type": "python",
+		"path": "LlxBootManager.py",
+		"class": "LlxBootManager"
+	},
+	"METHODS":
+	{
+        "getBootList":{},
+        "getBootOrder":{},
+        "getBootTimer":{},
+		"setBootOrder":{
+			"allowed_groups": ["sudo","admin","admins"]
+		},
+		"setBootTimer":{
+			"allowed_groups": ["sudo","admin","admins"]
+		},
+        "pushToBootList":{
+			"allowed_groups": ["sudo","admin","admins"]
+		},
+        "prependBootList":{
+			"allowed_groups": ["sudo","admin","admins"]
+		},
+        "removeFromBootList":{
+			"allowed_groups": ["sudo","admin","admins"]
+		},
+        "getClientsConfig":{
+			"allowed_groups": ["sudo","admin","admins"]
+		},
+        "getClientConfig":{
+			"allowed_groups": ["sudo","admin","admins"]
+		},
+        "setClientConfig":{
+			"allowed_groups": ["sudo","admin","admins"]
+		}
+	}
+}
