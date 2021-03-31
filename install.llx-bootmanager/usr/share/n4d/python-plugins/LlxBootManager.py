@@ -215,8 +215,8 @@ class LlxBootManager:
 
 		# Reading config file
 		try:
-	        f = open(self.clients_conf_path,'r');
-        	clients = (json.load(f));
+			f = open(self.clients_conf_path,'r');
+			clients = (json.load(f));
 			f.close();
 		except Exception as e:
 			# File does not exists. Create an empty json...
