@@ -6,15 +6,21 @@
 	},
 	"METHODS":
 	{
-        "getBootList":{},
-        "getBootOrder":{},
-        "getBootTimer":{},
-		"setBootOrder":{
-			"allowed_groups": ["sudo","admin","admins"]
+        "getBootList":{
+			"allowed_groups": ["anonymous","*"]
 		},
-		"setBootTimer":{
-			"allowed_groups": ["sudo","admin","admins"]
+        "getBootOrder":{
+			"allowed_groups": ["anonymous","*"]
 		},
+        "getBootTimer":{
+			"allowed_groups": ["anonymous","*"]
+		},
+	"setBootOrder":{
+		"allowed_groups": ["sudo","admin","admins"]
+	},
+	"setBootTimer":{
+		"allowed_groups": ["sudo","admin","admins"]
+	},
         "pushToBootList":{
 			"allowed_groups": ["sudo","admin","admins"]
 		},
