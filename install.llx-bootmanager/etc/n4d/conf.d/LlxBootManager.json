@@ -1,43 +1,43 @@
 {
-	"SETUP":{
-		"type": "python",
-		"path": "LlxBootManager.py",
-		"class": "LlxBootManager"
-	},
-	"METHODS":
-	{
+    "SETUP":{
+        "type": "python",
+        "path": "LlxBootManager.py",
+        "class": "LlxBootManager"
+    },
+    "METHODS":
+    {
         "getBootList":{
-			"allowed_groups": ["anonymous","*"]
-		},
+            "allowed_groups": ["anonymous","*"]
+        },
         "getBootOrder":{
-			"allowed_groups": ["anonymous","*"]
-		},
+            "allowed_groups": ["anonymous","*"]
+        },
         "getBootTimer":{
-			"allowed_groups": ["anonymous","*"]
-		},
-	"setBootOrder":{
-		"allowed_groups": ["sudo","admin","admins"]
-	},
-	"setBootTimer":{
-		"allowed_groups": ["sudo","admin","admins"]
-	},
+            "allowed_groups": ["anonymous","*"]
+        },
+        "setBootOrder":{
+            "allowed_groups": ["sudo","admin","admins"]
+        },
+        "setBootTimer":{
+            "allowed_groups": ["sudo","admin","admins"]
+        },
         "pushToBootList":{
-			"allowed_groups": ["sudo","admin","admins"]
-		},
+            "allowed_groups": ["sudo","admin","admins"]
+        },
         "prependBootList":{
-			"allowed_groups": ["sudo","admin","admins"]
-		},
+            "allowed_groups": ["sudo","admin","admins"]
+        },
         "removeFromBootList":{
-			"allowed_groups": ["sudo","admin","admins"]
-		},
+            "allowed_groups": ["sudo","admin","admins"]
+        },
         "getClientsConfig":{
-			"allowed_groups": ["sudo","admin","admins"]
-		},
+            "allowed_groups": ["sudo","admin","admins"]
+        },
         "getClientConfig":{
-			"allowed_groups": ["sudo","admin","admins"]
-		},
+            "allowed_groups": ["sudo","admin","admins"]
+        },
         "setClientConfig":{
-			"allowed_groups": ["sudo","admin","admins"]
-		}
-	}
+            "allowed_groups": ["sudo","admin","admins"]
+        }
+    }
 }
