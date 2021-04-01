@@ -137,11 +137,11 @@ LlxNetBootManagerClient.prototype.populateGui=function populateGui(){
     let self=this;
     
     $("#llx_bootmanager_MainFrame").show();
-        self.showLists();
-        self.showTimer();
+    self.showLists();
+    self.showTimer();
 
-        $("#llx_bootmanager_btSave").bind('click', function(){
-            let new_boot_order=[];
+    $("#llx_bootmanager_btSave").bind('click', function(){
+        let new_boot_order=[];
 
         $('ul#llx_bootmanager_BootList li').each(function(index, element) {
             //alert ($(element).find(".llx_bootmanager_menuEntry").prop("id"));
@@ -160,7 +160,7 @@ LlxNetBootManagerClient.prototype.populateGui=function populateGui(){
         let arglist=new_boot_order;
         
         let time=$("#llx_bootmanager_slider")[0].noUiSlider.get();
-         
+        
         Utils.n4d(credentials, n4dclass, n4dmethod, arglist, function(response){
         
             credentials=[sessionStorage.username, sessionStorage.password];

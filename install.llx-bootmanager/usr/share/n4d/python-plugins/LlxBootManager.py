@@ -36,6 +36,8 @@ class LlxBootManager:
 		try:
 			json_data=open(self.cfgpath)
 			data=json.load(json_data)
+			if not isinstance(data,dict) or 'bootorder' not in data:
+				return n4d.responses.build_failed_call_response(ret_msg='Wrong content into '+self.cfgpath)	
 			return n4d.responses.build_successful_call_response(data["bootorder"])
 			#return data["bootorder"]
 		except Exception as e:
@@ -52,6 +54,8 @@ class LlxBootManager:
 			# print "label is "+label
 			json_data=open(self.cfgpath)
 			data=json.load(json_data)
+			if not isinstance(data,dict) or 'bootorder' not in data:
+				return n4d.responses.build_failed_call_response(ret_msg='Wrong content into '+self.cfgpath)	
 
 			# Removing label before push it
 			data['bootorder']=list(filter(lambda a: a !=label.encode("utf-8"), data['bootorder']))
@@ -76,6 +80,8 @@ class LlxBootManager:
 			# print "label is "+label
 			json_data=open(self.cfgpath)
 			data=json.load(json_data)
+			if not isinstance(data,dict) or 'bootorder' not in data:
+				return n4d.responses.build_failed_call_response(ret_msg='Wrong content into '+self.cfgpath)	
 
 			# Removing label occurences
 			data['bootorder']=list(filter(lambda a: a !=label.encode("utf-8"), data['bootorder']))
@@ -98,6 +104,8 @@ class LlxBootManager:
 			print("[LlxBootManager] Prepending label "+label+" to Boot List.")
 			json_data=open(self.cfgpath)
 			data=json.load(json_data)
+			if not isinstance(data,dict) or 'bootorder' not in data:
+				return n4d.responses.build_failed_call_response(ret_msg='Wrong content into '+self.cfgpath)	
 
 			# Removing label before push it
 			data['bootorder']=list(filter(lambda a: a !=label.encode("utf-8"), data['bootorder']))
@@ -118,6 +126,8 @@ class LlxBootManager:
 		try:
 			json_data=open(self.cfgpath);
 			data=json.load(json_data);
+			if not isinstance(data,dict) or 'bootorder' not in data or 'timeout' not in data:
+				return n4d.responses.build_failed_call_response(ret_msg='Wrong content for '+self.cfgpath)
 			return n4d.responses.build_successful_call_response(data['timeout'])
 			# return data["timeout"]
 		except Exception as e:
@@ -131,12 +141,15 @@ class LlxBootManager:
 		'''
 		try:
 			time=self.getBootTimer();
-
+			if time.get('status') != 0:
+				return n4d.responses.build_failed_call_response(ret_msg='Fail calling getBootTimer')
+			else:
+				time = time.get('return')
 			order=list(filter(None, order))
 
 			bootcfg= { "bootorder": order, "timeout": time }
 
-			bootcfg_string = unicode(json.dumps(bootcfg,indent=4,encoding="utf-8",ensure_ascii=False)).encode("utf-8")
+			bootcfg_string = json.dumps(bootcfg,indent=4,ensure_ascii=False)
 
 			f = open(self.cfgpath,'w')
 			f.writelines(bootcfg_string)
@@ -153,11 +166,19 @@ class LlxBootManager:
 		'''
 		Set timeout for pxe menu
 		'''
+		if isinstance(time,str) and not str.isnumeric(time):
+			return n4d.responses.build_failed_call_response(ret_msg='Wrong time parameter')
+		elif isinstance(time,int):
+			time = str(time)
+		
 		bootorder=self.getBootOrder();
-
+		if bootorder.get('status') != 0:
+			return n4d.responses.build_failed_call_response(ret_msg='Fail calling getBootOrder')
+		else:
+			bootorder = bootorder.get('return')
 		bootcfg= { "bootorder": bootorder, "timeout": time }
 
-		bootcfg_string = unicode(json.dumps(bootcfg,indent=4,encoding="utf-8",ensure_ascii=False)).encode("utf-8")
+		bootcfg_string = json.dumps(bootcfg,indent=4,ensure_ascii=False)
 
 		f = open(self.cfgpath,'w')
 		f.writelines(bootcfg_string)
