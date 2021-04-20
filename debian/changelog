@@ -1,3 +1,9 @@
+llx-bootmanager (0.4.7.6) focal; urgency=medium
+
+  * Fix postinst enabling n4d plugin
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Tue, 20 Apr 2021 11:08:25 +0200
+
 llx-bootmanager (0.4.7.5) focal; urgency=medium
 
   * Fix some calls

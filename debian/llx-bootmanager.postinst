@@ -33,7 +33,7 @@ case "$1" in
 
 	invoke-rc.d apache2 reload || true
 
-	n4d-modules enable-plugin /etc/n4d/conf.d/LlxBootManager || true
+	n4d-modules enable-plugin /etc/n4d/conf.d/LlxBootManager.json || true
 
 	echo "Restarting dnsmasq"
 	invoke-rc.d dnsmasq restart || true
