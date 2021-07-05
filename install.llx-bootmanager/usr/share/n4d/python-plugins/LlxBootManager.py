@@ -63,7 +63,7 @@ class LlxBootManager:
 			data['bootorder']=list(filter(None, data['bootorder']))
 
 			# Push label
-			data["bootorder"].append(label.encode("utf-8"));
+			data["bootorder"].append(label)
 			return n4d.responses.build_successful_call_response(self.setBootOrder(*data["bootorder"]))
 			# return (self.setBootOrder(*data["bootorder"]));
 
