@@ -22,11 +22,11 @@ class LlxBootManager:
 			command=["php", self.php_path+"/getmenujson.php"]
 			proc = subprocess.Popen(command,  stdout=subprocess.PIPE, cwd=self.php_path)
 			out, err = proc.communicate()
-			return n4d.responses.build_successful_call_response(ret_msg=json.loads(out))
+			return n4d.responses.build_successful_call_response(json.loads(out))
 			# return json.loads(out)
 		except Exception as e:
-			print "Exception: "+str(e)
-			return n4d.responses.build_unhandled_error_response(-1,ret_msg=str(e))
+			print("Exception: "+str(e))
+			return n4d.responses.build_failed_call_response(ret_msg=str(e))
 			#return -1
 
 	def getBootOrder(self):
@@ -36,11 +36,13 @@ class LlxBootManager:
 		try:
 			json_data=open(self.cfgpath)
 			data=json.load(json_data)
-			return n4d.responses.build_successful_call_response(ret_msg=data["bootorder"])
+			if not isinstance(data,dict) or 'bootorder' not in data:
+				return n4d.responses.build_failed_call_response(ret_msg='Wrong content into '+self.cfgpath)	
+			return n4d.responses.build_successful_call_response(data["bootorder"])
 			#return data["bootorder"]
 		except Exception as e:
-			print "Exception: "+str(e)
-			return n4d.responses.build_unhandled_error_response(-1,ret_msg=str(e))
+			print("Exception: "+str(e))
+			return n4d.responses.build_failed_call_response(ret_msg=str(e))
 			#return -1
 
 	def pushToBootList(self, label):
@@ -52,6 +54,8 @@ class LlxBootManager:
 			# print "label is "+label
 			json_data=open(self.cfgpath)
 			data=json.load(json_data)
+			if not isinstance(data,dict) or 'bootorder' not in data:
+				return n4d.responses.build_failed_call_response(ret_msg='Wrong content into '+self.cfgpath)	
 
 			# Removing label before push it
 			data['bootorder']=list(filter(lambda a: a !=label.encode("utf-8"), data['bootorder']))
@@ -60,35 +64,36 @@ class LlxBootManager:
 
 			# Push label
 			data["bootorder"].append(label.encode("utf-8"));
-			return n4d.responses.build_successful_call_response(ret_msg=self.setBootOrder(*data["bootorder"]))
+			return n4d.responses.build_successful_call_response(self.setBootOrder(*data["bootorder"]))
 			# return (self.setBootOrder(*data["bootorder"]));
 
 		except Exception as e:
-			print "Exception: "+str(e)
-			return n4d.responses.build_unhandled_error_response(-1,ret_msg=str(e))
+			print("Exception: "+str(e))
+			return n4d.responses.build_failed_call_response(ret_msg=str(e))
 			# return -1
 		
 	def removeFromBootList(self, label):
 		'''
 		Adds new label to Boot order for iPE Boot Menu
 		'''
-		
 		try:
 			# print "label is "+label
 			json_data=open(self.cfgpath)
 			data=json.load(json_data)
+			if not isinstance(data,dict) or 'bootorder' not in data:
+				return n4d.responses.build_failed_call_response(ret_msg='Wrong content into '+self.cfgpath)	
 
 			# Removing label occurences
 			data['bootorder']=list(filter(lambda a: a !=label.encode("utf-8"), data['bootorder']))
 			# Cleaning
 			data['bootorder']=list(filter(None, data['bootorder']))
 
-			return n4d.responses.build_successful_call_response(ret_msg=self.setBootOrder(*data["bootorder"]))
+			return n4d.responses.build_successful_call_response(self.setBootOrder(*data["bootorder"]))
 			# return (self.setBootOrder(*data["bootorder"]));
 
 		except Exception as e:
-			print "Exception: "+str(e)
-			return n4d.responses.build_unhandled_error_response(-1,ret_msg=str(e))
+			print("Exception: "+str(e))
+			return n4d.responses.build_failed_call_response(ret_msg=str(e))
 			# return -1
 
 	def prependBootList(self, label):
@@ -96,20 +101,22 @@ class LlxBootManager:
 		Appending Boot List with label and returns the boot order for iPE Boot Menu
 		'''
 		try:
-			print "[LlxBootManager] Prepending label "+label+" to Boot List."
+			print("[LlxBootManager] Prepending label "+label+" to Boot List.")
 			json_data=open(self.cfgpath)
 			data=json.load(json_data)
+			if not isinstance(data,dict) or 'bootorder' not in data:
+				return n4d.responses.build_failed_call_response(ret_msg='Wrong content into '+self.cfgpath)	
 
 			# Removing label before push it
 			data['bootorder']=list(filter(lambda a: a !=label.encode("utf-8"), data['bootorder']))
 
 			data["bootorder"].insert(0,label.encode("utf-8"))
-			return n4d.responses.build_successful_call_response(ret_msg=self.setBootOrder(*data["bootorder"]))
+			return n4d.responses.build_successful_call_response(self.setBootOrder(*data["bootorder"]))
 			# return (self.setBootOrder(*data["bootorder"]))
 
 		except Exception as e:
-			print "Exception: "+str(e)
-			return n4d.responses.build_unhandled_error_response(ret_msg=str(e))
+			print("Exception: "+str(e))
+			return n4d.responses.build_failed_call_response(ret_msg=str(e))
 			# return -1
 
 	def getBootTimer(self):
@@ -119,11 +126,13 @@ class LlxBootManager:
 		try:
 			json_data=open(self.cfgpath);
 			data=json.load(json_data);
-			return n4d.responses.build_successful_call_response(ret_msg=data['timeout'])
+			if not isinstance(data,dict) or 'bootorder' not in data or 'timeout' not in data:
+				return n4d.responses.build_failed_call_response(ret_msg='Wrong content for '+self.cfgpath)
+			return n4d.responses.build_successful_call_response(data['timeout'])
 			# return data["timeout"]
 		except Exception as e:
-			print "Exception: "+str(e)
-			retunr n4d.responses.build_unhandled_error_response(-1,ret_msg=str(e))
+			print("Exception: "+str(e))
+			return n4d.responses.build_failed_call_response(ret_msg=str(e))
 			# return -1
 
 	def setBootOrder(self, *order):
@@ -132,12 +141,15 @@ class LlxBootManager:
 		'''
 		try:
 			time=self.getBootTimer();
-
+			if time.get('status') != 0:
+				return n4d.responses.build_failed_call_response(ret_msg='Fail calling getBootTimer')
+			else:
+				time = time.get('return')
 			order=list(filter(None, order))
 
 			bootcfg= { "bootorder": order, "timeout": time }
 
-			bootcfg_string = unicode(json.dumps(bootcfg,indent=4,encoding="utf-8",ensure_ascii=False)).encode("utf-8")
+			bootcfg_string = json.dumps(bootcfg,indent=4,ensure_ascii=False)
 
 			f = open(self.cfgpath,'w')
 			f.writelines(bootcfg_string)
@@ -145,8 +157,8 @@ class LlxBootManager:
 
 			return n4d.responses.build_successful_call_response()
 		except Exception as e:
-			print "Exception: "+str(e)
-			return n4d.responses.build_unhandled_error_response(-1,ret_msg=str(e))
+			print("Exception: "+str(e))
+			return n4d.responses.build_failed_call_response(ret_msg=str(e))
 			# return -1
 		pass
 
@@ -154,17 +166,25 @@ class LlxBootManager:
 		'''
 		Set timeout for pxe menu
 		'''
+		if isinstance(time,str) and not str.isnumeric(time):
+			return n4d.responses.build_failed_call_response(ret_msg='Wrong time parameter')
+		elif isinstance(time,int):
+			time = str(time)
+		
 		bootorder=self.getBootOrder();
-
+		if bootorder.get('status') != 0:
+			return n4d.responses.build_failed_call_response(ret_msg='Fail calling getBootOrder')
+		else:
+			bootorder = bootorder.get('return')
 		bootcfg= { "bootorder": bootorder, "timeout": time }
 
-		bootcfg_string = unicode(json.dumps(bootcfg,indent=4,encoding="utf-8",ensure_ascii=False)).encode("utf-8")
+		bootcfg_string = json.dumps(bootcfg,indent=4,ensure_ascii=False)
 
 		f = open(self.cfgpath,'w')
 		f.writelines(bootcfg_string)
 		f.close()
 		
-		retunr n4d.responses.build_successful_call_response()
+		return n4d.responses.build_successful_call_response()
 
 
 	# Methods to configure boot clients
@@ -177,9 +197,9 @@ class LlxBootManager:
 			f = open(self.clients_conf_path,'r');
 			data = (json.load(f));
 			f.close();
-			return (json.dumps(data));
+			return n4d.responses.build_successful_call_response(json.dumps(data));
 		except Exception as e:
-			return n4d.responses.build_failed_call_response(-1)
+			return n4d.responses.build_failed_call_response(str(e))
             # return False
 		return n4d.responses.build_successful_call_response()
 
@@ -194,14 +214,14 @@ class LlxBootManager:
 
 			for cl in clients["clients"]:
 				if (cl["mac"]==mac):
-					return n4d.responses.build_successful_call_response(ret_msg=cl['boot'])
+					return n4d.responses.build_successful_call_response(cl['boot'])
 					# return cl["boot"]
 
 			# if not found...
 			# return False
-			return n4d.responses.build_failed_call_response(-1)	
+			return n4d.responses.build_successful_call_response(False)	
 		except Exception as e:
-			return n4d.responses.build_unhandled_error_response(-1,str(e))
+			return n4d.responses.build_failed_call_response(ret_msg=str(e))
 			#return False
 
 	def setClientConfig(self, *args):
@@ -216,8 +236,8 @@ class LlxBootManager:
 
 		# Reading config file
 		try:
-	        f = open(self.clients_conf_path,'r');
-        	clients = (json.load(f));
+			f = open(self.clients_conf_path,'r');
+			clients = (json.load(f));
 			f.close();
 		except Exception as e:
 			# File does not exists. Create an empty json...
