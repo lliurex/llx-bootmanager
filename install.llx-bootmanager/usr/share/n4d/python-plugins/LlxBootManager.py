@@ -110,7 +110,7 @@ class LlxBootManager:
 			# Removing label before push it
 			data['bootorder']=list(filter(lambda a: a !=label.encode("utf-8"), data['bootorder']))
 
-			data["bootorder"].insert(0,label.encode("utf-8"))
+			data["bootorder"].insert(0,label)
 			return n4d.responses.build_successful_call_response(self.setBootOrder(*data["bootorder"]))
 			# return (self.setBootOrder(*data["bootorder"]))
 
@@ -200,7 +200,7 @@ class LlxBootManager:
 			return n4d.responses.build_successful_call_response(json.dumps(data));
 		except Exception as e:
 			return n4d.responses.build_failed_call_response(str(e))
-            # return False
+			# return False
 		return n4d.responses.build_successful_call_response()
 
 	def getClientConfig(self, mac):
