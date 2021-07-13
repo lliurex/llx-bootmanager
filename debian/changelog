@@ -1,3 +1,9 @@
+llx-bootmanager (0.4.8) focal; urgency=medium
+
+  * Remove useless encode
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Wed, 14 Jul 2021 01:03:14 +0200
+
 llx-bootmanager (0.4.7.6) focal; urgency=medium
 
   * Fix postinst enabling n4d plugin
