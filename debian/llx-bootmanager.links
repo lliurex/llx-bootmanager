@@ -3,9 +3,11 @@
 
 # UEFI MODULE
 /usr/lib/ipxe/ipxe.efi  /var/lib/tftpboot/llxbootmanager/ipxe.efi
+/usr/lib/grub/x86_64-efi-signed/grubnetx64.efi.signed /var/lib/tftpboot/grubnetx64.efi
 
 # PXE MODULE
 /usr/lib/PXELINUX/pxelinux.0 /var/lib/tftpboot/llxbootmanager/pxelinux.0
+/usr/lib/PXELINUX/lpxelinux.0 /var/lib/tftpboot/llxbootmanager/lpxelinux.0
 
 # HTTP SERVED
 /var/lib/tftpboot/llxbootmanager /usr/share/llxbootmanager/www-boot/pxe
@@ -50,3 +52,6 @@
 # HDT MODULE SERVED FROM HTTPD IPXE
 /boot/memtest86+.bin /var/lib/tftpboot/ltsp/netinstall/memtest86+.bin
  
+
+# GRUB FOR EFI SYSTEMS
+/sr/lib/grub/x86_64-efi /var/lib/tftpboot/x86_64-efi
