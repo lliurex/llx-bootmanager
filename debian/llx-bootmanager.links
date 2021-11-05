@@ -3,7 +3,7 @@
 
 # UEFI MODULE
 /usr/lib/ipxe/ipxe.efi  /var/lib/tftpboot/llxbootmanager/ipxe.efi
-/usr/lib/grub/x86_64-efi-signed/grubnetx64.efi.signed /var/lib/tftpboot/grubnetx64.efi
+/usr/lib/grub/x86_64-efi-signed/grubnetx64.efi.signed /var/lib/tftpboot/llxbootmanager/grubnetx64.efi
 
 # PXE MODULE
 /usr/lib/PXELINUX/pxelinux.0 /var/lib/tftpboot/llxbootmanager/pxelinux.0
@@ -54,4 +54,4 @@
  
 
 # GRUB FOR EFI SYSTEMS
-/sr/lib/grub/x86_64-efi /var/lib/tftpboot/x86_64-efi
+/sr/lib/grub/x86_64-efi /var/lib/tftpboot/llxbootmanager/x86_64-efi
