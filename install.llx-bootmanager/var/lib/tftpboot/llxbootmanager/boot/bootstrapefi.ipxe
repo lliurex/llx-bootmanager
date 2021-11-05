@@ -1,0 +1,15 @@
+# SAMPLE FILE FOR LOAD UEFI SYSTEMS THROUGH IPXE SCRIPT
+# 
+# #!ipxe
+# 
+# iseq ${platform} efi && goto chain_efi || goto chain_pcbios
+# 
+# :chain_efi
+# echo BOOTING EFI...
+# chain http://${next-server}/ipxeboot/grubnetx64.efi
+#    OR  
+# chain http://${next-server}/ipxeboot/boot.php?mac=${mac}&ip=${ip}&asset=${asset}&manufacturer=${manufacturer}&product=${product}&serial=${serial}&platform=${platform} 
+# 
+# :chain_pcbios
+# echo BOOTING PCBIOS...
+# chain http://${next-server}/ipxeboot/boot.php?mac=${mac}&ip=${ip}&asset=${asset}&manufacturer=${manufacturer}&product=${product}&serial=${serial}&platform=${platform}
