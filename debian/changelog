@@ -1,4 +1,4 @@
-llx-bootmanager (0.5) focal; urgency=medium
+llx-bootmanager (0.5) focal-updates; urgency=medium
 
   * Support for EFI boot
 
