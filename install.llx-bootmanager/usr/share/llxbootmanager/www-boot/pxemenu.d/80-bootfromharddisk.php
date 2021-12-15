@@ -1,5 +1,5 @@
 <?php
-     
+if (!isset($PLATFORM) || trim(strtolower($PLATFORM)) != "efi"){
 $MenuEntryList=array();
 $MenuEntry=new stdClass();
 $MenuEntry->id="bootfromhd";
@@ -12,5 +12,5 @@ array_push($MenuEntryList, $MenuEntry);
 
 // "Return" MenuEntryListObject
 $MenuEntryListObject=$MenuEntryList;
-
+}
 ?>

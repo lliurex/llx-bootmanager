@@ -1,7 +1,16 @@
 <?php
 
-$MAC=$_GET["mac"];
-  
+if (isset($_GET["mac"])){
+    $MAC=$_GET["mac"];
+}else{
+    $MAC="";
+}
+if (isset($_GET["platform"])){
+    $PLATFORM=$_GET["platform"];
+}else{
+    $PLATFOM="";
+}
+
 header ( "Content-type: text/plain" );
 
 $default_boot=""; // To set default boot when reading
@@ -9,7 +18,7 @@ $default_boot=""; // To set default boot when reading
 function write_header($time){
 echo "
 MENU TITLE Arrencada per xarxa de LliureX
-MENU BACKGROUND pxe/lliurex-pxe.png
+MENU BACKGROUND ../lliurex-pxe.png
 
 MENU WIDTH 80
 MENU MARGIN 10
@@ -29,60 +38,81 @@ TIMEOUT ".$time."
 }
 
 function getBootTimeOut(){
-	$cfgpath="/etc/llxbootmanager/bootcfg.json";
-	$data=file_get_contents($cfgpath);
-	$json_data=json_decode($data, true);
-	return $json_data["timeout"];
+    $cfgpath="/etc/llxbootmanager/bootcfg.json";
+    if (file_exists($cfgpath)){
+        try{
+            $data=file_get_contents($cfgpath);
+            $json_data=json_decode($data, true);
+            return $json_data["timeout"];
+        }catch(Exception $e){
+            error_log($e);
+            return "10";
+        }
+    }else{
+		error_log("$cfgpath not exists");
+        return "10";
+    }
 }
 
 function getBootOrder(){
-	$cfgpath="/etc/llxbootmanager/bootcfg.json";
-	$data=file_get_contents($cfgpath);
-	$json_data=json_decode($data, true);
-	return $json_data["bootorder"];
+    $cfgpath="/etc/llxbootmanager/bootcfg.json";
+	if (file_exists($cfgpath)){
+		try{
+			$data=file_get_contents($cfgpath);
+			$json_data=json_decode($data, true);
+			return $json_data["bootorder"];
+		}catch(Exception $e){
+			error_log($e);
+		}
+	}else{
+		error_log("$cfgpath not exists");
+	}
 }
 
 function getClientSpecificBoot($MAC){
 
-	$defboot=null;
-	try{
-        	$cfgpath="/etc/llxbootmanager/clients.json";
-	        $data=file_get_contents($cfgpath);
-	        $json_data=json_decode($data, true);
-		foreach ($json_data["clients"] as $client){
-			if ($MAC==$client["mac"])  {
-				// IDEA: Can check if it is bootable?
-				return $client["boot"];
-				
+    $defboot=null;
+    try{
+		$cfgpath="/etc/llxbootmanager/clients.json";
+		if (file_exists($cfgpath)){
+			$data=file_get_contents($cfgpath);
+			$json_data=json_decode($data, true);
+			foreach ($json_data["clients"] as $client){
+				if ($MAC==$client["mac"]){
+					// IDEA: Can check if it is bootable?
+					return $client["boot"];
 				}
+			}
+		}else{
+			error_log("$cfgpath not exists");
+			return null;
 		}
-	}catch (Exception $e){
-		return null;			
-	}
-	return $defboot;
+    }catch (Exception $e){
+       	return null;			
+    }
+    return $defboot;
 }
 
-
 function findMenuEntry($menuList, $option){
-        $MenuEntry=new stdClass();
-	$MenuEntry->arraypos=-1;
-	$MenuEntry->menuitem=null;
+    $MenuEntry=new stdClass();
+    $MenuEntry->arraypos=-1;
+    $MenuEntry->menuitem=null;
 
-	$pos=0;
-	foreach($menuList as $menuItem){
-		if($option==$menuItem->id){
-			$MenuEntry->arraypos=$pos;
-			$MenuEntry->menuitem=$menuItem;
-			echo ("_pos_".$pos."\n");
-		}
-		$pos=$pos+1;
-	}
-	return $MenuEntry;
+    $pos=0;
+    foreach($menuList as $menuItem){
+        if($option==$menuItem->id){
+            $MenuEntry->arraypos=$pos;
+            $MenuEntry->menuitem=$menuItem;
+            //echo ("_pos_".$pos."\n");
+        }
+        $pos=$pos+1;
+    }
+    return $MenuEntry;
 }
 
 // Is there any specific boot for MAC?
 $specificBoot=getClientSpecificBoot($MAC);
-if ($specificBoot==null) error_log("Mac unregistered");
+if ($specificBoot==null) error_log("Mac param not registered, specific boot not applied");
 else error_log($specificBoot);
 
 // Write Menu
@@ -103,40 +133,38 @@ $menuList=array();
 $rescueMenu=array();
 
 // Include all files in pxemenu.d menu to $menulist
-foreach (glob("pxemenu.d/*.php") as $filename)
+foreach (glob("/var/www/ipxeboot/pxemenu.d/*.php") as $filename)
 {
-     $MenuEntryListObject=null;
-	// $ filename should define $MenuEntryListObject
-     include $filename;
-	
-	if($MenuEntryListObject!=null){
-		foreach($MenuEntryListObject as $entry){
-			$current_label=explode("\n", str_replace("label ", "",$entry->menuString))[0];
-			// If there's not default boot or it exists and is current, let's add.
-			error_log("specific boot:".$specificBoot."*");
-			error_log("Current Label:".$current_label."*");
-			array_push($rescueMenu, $entry); // Filling rescue menu
-			if (($specificBoot==null)||($specificBoot==$current_label)) 
-				array_push($menuList, $entry);
-		}
-		// If menulist is empty, overwrite by rescuemenu
-		if (count($menuList)==0) {
-			error_log("[LLXBootmanager Warning] Entry ".$specificBoot." does not exists.");
-			$menuList=$rescueMenu;
-			}
-	}
-	
+    $MenuEntryListObject=null;
+    // $ filename should define $MenuEntryListObject
+    include $filename;
+    
+    if($MenuEntryListObject!=null){
+        foreach($MenuEntryListObject as $entry){
+            $current_label=explode("\n", str_replace("label ", "",$entry->menuString))[0];
+            // If there's not default boot or it exists and is current, let's add.
+            error_log("specific boot:".$specificBoot."*"." Current Label:".$current_label."*");
+            array_push($rescueMenu, $entry); // Filling rescue menu
+            if (($specificBoot==null)||($specificBoot==$current_label)) 
+                array_push($menuList, $entry);
+        }
+        // If menulist is empty, overwrite by rescuemenu
+        if (count($menuList)==0) {
+            error_log("[LLXBootmanager Warning] Entry ".$specificBoot." does not exists.");
+            $menuList=$rescueMenu;
+        }
+    }
 }
 
 // Ordering menu list
 foreach ($bootorder as $option){
-	$entry=findMenuEntry($menuList, $option);  // find option in menu list
-	if ($entry->menuitem!=null){
-		//echo "Adding: ".$entry->menuitem->id." Removing: ".$entry->arraypos."\n";
-		array_push($bootlist, $entry->menuitem); // Adding menu entry to boot list
-		unset($menuList[$entry->arraypos]);
-		$menuList=array_values($menuList);
-	}
+    $entry=findMenuEntry($menuList, $option);  // find option in menu list
+    if ($entry->menuitem!=null){
+        //echo "Adding: ".$entry->menuitem->id." Removing: ".$entry->arraypos."\n";
+        array_push($bootlist, $entry->menuitem); // Adding menu entry to boot list
+        unset($menuList[$entry->arraypos]);
+        $menuList=array_values($menuList);
+    }
 }
 
 /* REMOVED:
@@ -144,12 +172,14 @@ foreach ($bootorder as $option){
  * 
  // Adding options that are not in the list 
 foreach ($menuList as $entry)
-	array_push($bootlist, $entry); // Adding menu entry to boot list
+    array_push($bootlist, $entry); // Adding menu entry to boot list
 */
 
 foreach ($bootlist as $opt){
         //echo $opt->id;
-	echo $opt->menuString."\n";
+    $regex=array('/( |,)(pxe|pxe-ltsp|opensysclone-system|netinstall)(.*)/iU','/(initrd=)(pxe|pxe-ltsp|opensysclone-system|netinstall)(\/.*)/i');
+    $subs=array('\1../../\2\3','\1../../\2\3');
+    echo preg_replace($regex,$subs,$opt->menuString)."\n";
  }
 
 ?>
