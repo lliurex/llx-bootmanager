@@ -42,7 +42,7 @@ class LlxBootManager:
 			#return data["bootorder"]
 		except Exception as e:
 			print("Exception: "+str(e))
-			return n4d.responses.build_failed_call_response(ret_msg=str(e))
+			return n4d.responses.build_successful_call_response("-1")
 			#return -1
 
 	def pushToBootList(self, label):
