@@ -17,7 +17,8 @@ Description: LliureX Boot Manager
 
 Package: admin-center-llx-bootmanager
 Architecture: all 
-Depends: ${shlibs:Depends}, ${misc:Depends}, admin-center
+#Depends: ${shlibs:Depends}, ${misc:Depends}, admin-center
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: LliureX BootManager Module For Admin Center.
  Network Boot Manager basesystem
  for LliureX environments. (admin-center module)
